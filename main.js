@@ -37,10 +37,17 @@ const initializeVariables = (data) => {
   data.gameOver = false;
 };
 
+const addEventListenersToGameBoard = (data) => {
+  document.querySelectorAll(".box").forEach((box) => {
+    box.addEventListener("click", (event) => {
+      playMove(event.target, data);
+    });
+  });
+};
+
 const initializeGame = (data) => {
   //initialize game variables
   initializeVariables(data);
 
-  console.log(data);
   //add event listeners to the gameboard
 };
