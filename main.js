@@ -96,7 +96,11 @@ const playMove = (box, data) => {
     //easy ai
     easyAiMove(data);
     data.currentPlayer = "X";
+
     //change back to player1
+  } else if (data.choice === 2) {
+    impossibleAIMove(data);
+    data.currentPlayer = "X";
   }
 };
 
@@ -150,14 +154,14 @@ const changePlayer = (data) => {
 const easyAiMove = (data) => {
   changePlayer(data);
 
+  data.round++;
+  let availableSpaces = data.board.filter(
+    (space) => space !== "X" && space !== "O"
+  );
+  let move =
+    availableSpaces[Math.floor(Math.random() * availableSpaces.length)];
+  data.board[move] = data.player2;
   setTimeout(() => {
-    let availableSpaces = data.board.filter(
-      (space) => space !== "X" && space !== "O"
-    );
-    let move =
-      availableSpaces[Math.floor(Math.random() * availableSpaces.length)];
-    console.log(move);
-    data.board[move] = data.player2;
     let box = document.getElementById(`${move}`);
     box.textContent = data.player2;
     box.classList.add("player2");
@@ -166,6 +170,9 @@ const easyAiMove = (data) => {
   if (endConditions(data)) {
     return;
   }
-
   changePlayer(data);
+};
+
+const impossibleAIMove = (data) => {
+  data.round++;
 };
